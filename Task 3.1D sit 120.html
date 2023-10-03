@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>My Vue 3 Project</title>
+</head>
+<body>
+    <div id="app">
+        <!-- Vue Router will render the appropriate component here -->
+        <template>
+            <div>
+              <div id="map"></div>
+            </div>
+          </template>
+          
+          <script>
+          export default {
+            mounted() {
+              // Initialize Google Maps here
+              const map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 0, lng: 0 },
+                zoom: 8,
+              });
+            },
+          };
+          </script>
+          
+        <router-view></router-view>
+    </div>
+
+    <!-- Vue 3 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.js"></script>
+    <!-- Vue Router CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.0.0/dist/vue-router.js"></script>
+    <!-- Your other scripts (e.g., Chart.js, Google Maps API) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+
+    <!-- Include your main.js script -->
+    <script src="main.js"></script>
+         const express = require('express');
+        const mongoose = require('mongoose');
+        const app = express();
+
+            mongoose.connect('mongodb://localhost/mydatabase', {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                });
+
+// Define your API routes and database models here
+
+    app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});
+</body>
+</html>
