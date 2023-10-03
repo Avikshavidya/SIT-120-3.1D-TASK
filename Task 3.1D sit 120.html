@@ -3,55 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="styles.css">
-    <title>My Vue 3 Project</title>
+    <style>
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+           
+            header {
+                padding: 10px;
+            }
+            nav ul {
+                margin-top: 10px;
+                text-align: center;
+            }
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            .hero {
+                padding: 10px;
+            }
+            .featured-articles {
+                padding: 10px;
+            }
+            .interactive-map {
+                padding: 10px;
+            }
+        }
+
+        /* Transitions and Animations */
+        .cta-button {
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #45a049;
+            color: #fff;
+        }
+
+        /* Multiple Columns */
+        .featured-articles ul {
+            columns: 2; /* Create two columns */
+            column-gap: 20px; /* Gap between columns */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .featured-articles li {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+    <title>EcoHub - Your Sustainable Lifestyle Companion</title>
 </head>
-<body>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0;">
+
+    <!-- Vue App Container -->
     <div id="app">
-        <!-- Vue Router will render the appropriate component here -->
-        <template>
-            <div>
-              <div id="map"></div>
-            </div>
-          </template>
-          
-          <script>
-          export default {
-            mounted() {
-              // Initialize Google Maps here
-              const map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 0, lng: 0 },
-                zoom: 8,
-              });
-            },
-          };
-          </script>
-          
-        <router-view></router-view>
+        <!-- Header Section -->
+        <header style="background-color: #4CAF50; color: #fff; padding: 20px;">
+            <!-- Navigation Menu -->
+            <nav>
+                <!-- EcoHub Logo -->
+                <div class="logo">
+                    <img src="logo.png" alt="EcoHub Logo" style="width: 150px;">
+                </div>
+                <!-- Navigation Links -->
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    <li style="display: inline; margin-right: 20px;"><a href="#" style="text-decoration: none; color: #fff;">Home</a></li>
+                    <li style="display: inline; margin-right: 20px;"><a href="#" style="text-decoration: none; color: #fff;">Articles</a></li>
+                    <li style="display: inline; margin-right: 20px;"><a href="#" style="text-decoration: none; color: #fff;">Products</a></li>
+                    <li style="display: inline;"><a href="#" style="text-decoration: none; color: #fff;">Events</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Content Section -->
+        <main style="padding: 20px;">
+
+            
+            <section class="hero" style="background-color: #fff; padding: 20px; text-align: center;">
+                
+                <h1>Welcome to {{ appName }}</h1>
+                
+                <p>Your Sustainable Lifestyle Companion</p>
+                
+                <a href="#" class="cta-button" style="background-color: #4CAF50; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Get Started</a>
+            </section>
+
+           
+            <section class="featured-articles" style="background-color: #fff; padding: 20px;">
+                
+                <featured-articles :articles="featuredArticles"></featured-articles>
+            </section>
+
+            
+            <section class="interactive-map" style="background-color: #fff; padding: 20px;">
+                <h2>Explore Eco-Friendly Locations</h2>
+                
+                
+            </section>
+        </main>
+
+        <!-- Footer Section -->
+        <footer style="background-color: #4CAF50; color: #fff; text-align: center; padding: 10px;">
+            
+            <p>&copy; 2023 EcoHub</p>
+        </footer>
     </div>
 
-    <!-- Vue 3 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.js"></script>
-    <!-- Vue Router CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/vue-router@4.0.0/dist/vue-router.js"></script>
-    <!-- Your other scripts (e.g., Chart.js, Google Maps API) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+    <!-- Include Vue 3 library -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.0.0/dist/vue.global.js"></script>
 
-    <!-- Include your main.js script -->
-    <script src="main.js"></script>
-         const express = require('express');
-        const mongoose = require('mongoose');
-        const app = express();
+    <!-- Vue 3 App -->
+    <script>
+       
+        const app = Vue.createApp({
+            data() {
+                return {
+                    appName: "EcoHub",
+                    featuredArticles: [
+                        { id: 1, title: "The Benefits of Sustainable Living", summary: "Learn how sustainable living can benefit both you and the environment." },
+                        { id: 2, title: "Tips for Reducing Your Carbon Footprint", summary: "Simple steps to reduce your impact on the planet." },
+                        { id: 3, title: "Eco-Friendly Products for Your Home", summary: "Discover eco-friendly alternatives for a greener lifestyle." }
+                    ],
+                   
+                }
+            }
+        });
 
-            mongoose.connect('mongodb://localhost/mydatabase', {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-                });
+        
+        app.component('featured-articles', {
+            props: ['articles'],
+            template: `
+                <div>
+                    <h2>Featured Articles</h2>
+                    <ul>
+                        <li v-for="article in articles" :key="article.id">
+                            <h3>{{ article.title }}</h3>
+                            <p>{{ article.summary }}</p>
+                        </li>
+                    </ul>
+                </div>
+            `
+        });
 
-// Define your API routes and database models here
-
-    app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
+        
+        app.mount('#app');
+    </script>
 </body>
 </html>
